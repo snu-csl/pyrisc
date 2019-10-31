@@ -34,7 +34,7 @@ The following instructions are intentionally left unimplemented for future class
 
 ### Memory
 
-The target machine is assumed to have separate Instruction Memory (imem) and Data Memory (dmem), whose sizes are 64KB each. imem starts at memory address 0x80000000 followed by dmem. Hence, the valid memory regions are 0x80000000 ~ 0x8000ffff for imem, and 0x80001000 ~ 0x8001ffff for dmem. The stack pointer should be initialized to 0x80020000 by the startup code.
+The target machine is assumed to have separate Instruction Memory (imem) and Data Memory (dmem), whose sizes are 64KB each. imem starts at memory address 0x80000000 followed by dmem. Hence, the valid memory regions are 0x80000000 ~ 0x8000ffff for imem, and 0x80010000 ~ 0x8001ffff for dmem. The stack pointer should be initialized to 0x80020000 by the startup code.
 
 ## Running __snurisc__
 
@@ -67,7 +67,7 @@ There are several restrictions when an executable file is built from a RISC-V as
 3. The entry point to the code should be explicitly marked with the `_start` label. It is used to initialize the `pc` register before the program is executed.
 4. No standard C startup code or libraries should be linked to the executable file.
 
-In order to meet these requirements, we provide a Makefile and a linker script that can be used to build PyRISC-compatible RISC-V executable files. They are available in the ``~/asm`` directory.
+In order to meet these requirements, we provide Makefile and linker script that can be used to build PyRISC-compatible RISC-V executable files. They are available in the ``../asm`` directory.
 
 Note that, unlike the "golden standard" RISC-V instruction set simulator [spike](https://github.com/riscv/riscv-isa-sim), __snurisc__ does not support Privileged instructions nor HTIF (Host-Target Interface). Hence, any program on __snurisc__ should not rely on application execution environment such as [pk](https://github.com/riscv/riscv-pk).
 
