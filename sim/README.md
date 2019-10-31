@@ -38,9 +38,9 @@ The target machine is assumed to have separate Instruction Memory (imem) and Dat
 
 ## Running __snurisc__
 
-First, you need to install Python modules, `numpy` and `elftools`, to run the __snurisc__. Please refer to the top-level PyRISC [README.md] file (https://github.com/snu-csl/pyrisc/README.md) for installation steps for these modules.
+First, you need to install Python modules, `numpy` and `elftools`, to run the __snurisc__. Please refer to the top-level PyRISC [README.md](https://github.com/snu-csl/pyrisc/README.md) file for installation steps for these modules.
 
-Basically, __snurisc__ requires the name of the executable file to be run, as shown in the following. You can print various log information each cycle or at the end of the program execution by using the `-l` argument. You can also configure the simulator to print logs after a certain number of cycles by using the `-c` argument.
+Basically, __snurisc__ requires the name of the executable file to run, as shown in the following. You can print various log information each cycle or at the end of the program execution by using the `-l` argument. You can also configure the simulator to print logs after a certain number of cycles by using the `-c` argument.
 
 ```
 SNURISC: A RISC-V Instruction Set Simulator in Python
@@ -64,7 +64,7 @@ __snurisc__ accepts a RISC-V executable file compiled by the standard RISC-V GNU
 There are several restrictions when an executable file is built from a RISC-V assembly program on __snurisc__.
 1. The text section should begin at the memory address 0x80000000, which is the start address of the Instruction Memory (imem).
 2. Similarly, the data section should begin at the memory address 0x80010000 which is the start address of the Data Memory (dmem).
-3. The entry point to the code should be explicitly marked with the `_start` label. It is used to initialize the `pc` register when the program is executed.
+3. The entry point to the code should be explicitly marked with the `_start` label. It is used to initialize the `pc` register before the program is executed.
 4. No standard C startup code or libraries should be linked to the executable file.
 
 In order to meet these requirements, we provide a Makefile and a linker script that can be used to build PyRISC-compatible RISC-V executable files. They are available in the ``~/asm`` directory.
