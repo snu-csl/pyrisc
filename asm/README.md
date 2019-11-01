@@ -11,7 +11,7 @@ The file `fib.s` is a RISC-V assembly code that computes the Fibonacci number. T
 
 ## Building the executable file
 
-To build the PyRISC-compatible RISC-V executable file, just type `make`. Note that you should build the RISC-V GNU Toolchain first as specified in the PyRISC top-level [README.md](https://github.com/snu-csl/pyrisc/README.md) file.
+To build the PyRISC-compatible RISC-V executable file, just type `make`. Note that you should build the RISC-V GNU Toolchain first as specified in the PyRISC top-level [README.md](https://github.com/snu-csl/pyrisc/blob/master/README.md) file.
 
 ```
 $ make

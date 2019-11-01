@@ -38,7 +38,7 @@ The target machine is assumed to have separate Instruction Memory (imem) and Dat
 
 ## Running __snurisc__
 
-First, you need to install Python modules, `numpy` and `elftools`, to run the __snurisc__. Please refer to the top-level PyRISC [README.md](https://github.com/snu-csl/pyrisc/README.md) file for installation steps for these modules.
+First, you need to install Python modules, `numpy` and `elftools`, to run __snurisc__. Please refer to the top-level PyRISC [README.md](https://github.com/snu-csl/pyrisc/blob/master/README.md) file for installation steps for these modules.
 
 Basically, __snurisc__ requires the name of the executable file to run, as shown in the following. You can print various log information each cycle or at the end of the program execution by using the `-l` argument. You can also configure the simulator to print logs after a certain number of cycles by using the `-c` argument.
 
@@ -59,7 +59,7 @@ Usage: ./snurisc.py [-l n] [-c m] filename
 
 ## Building an Executable File
 
-__snurisc__ accepts a RISC-V executable file compiled by the standard RISC-V GNU toolchain that supports the RV32I base instruction set. In order to build the RISC-V GNU toolchain for use with __snurisc__, please refer to the [README.md](https://github.com/snu-csl/pyrisc/README.md) in the PyRISC top-level directory.
+__snurisc__ accepts a RISC-V executable file compiled by the standard RISC-V GNU toolchain that supports the RV32I base instruction set. In order to build the RISC-V GNU toolchain for use with __snurisc__, please refer to the [README.md](https://github.com/snu-csl/pyrisc/blob/master/README.md) in the PyRISC top-level directory.
 
 There are several restrictions when an executable file is built from a RISC-V assembly program on __snurisc__.
 1. The text section should begin at the memory address 0x80000000, which is the start address of the Instruction Memory (imem).
