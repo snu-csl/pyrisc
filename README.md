@@ -17,7 +17,7 @@ Please see the README file in each subdirectory for more information.
 
 ## Prerequisites
 
-The PyRISC toolset requires Python version 3.6 or higher. In addition, the PyRISC toolset depends on Python modules such as `numpy` and `elftools`. These packages can be installed on Ubuntu 18.04LTS as follows:
+The PyRISC toolset requires Python version 3.6 or higher. In addition, the PyRISC toolset depends on Python modules such as `numpy` and `pyelftools`. These modules can be installed on Ubuntu 18.04LTS as follows:
 
 ```
 $ sudo apt-get install python3-numpy python3-pyelftools
