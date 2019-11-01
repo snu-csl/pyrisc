@@ -24,8 +24,8 @@ INCDIR      =
 LIBDIR      =
 LIBS        =
 
-CFLAGS      = -Og -march=rv32g -mabi=ilp32 -static 
-ASLFAGS     = -march=rv32g -mabi=ilp32 -static 
+CFLAGS      = -Og -march=rv32i -mabi=ilp32 -static 
+ASLFAGS     = -march=rv32i -mabi=ilp32 -static 
 LDFLAGS     = -T./link.ld -nostdlib -nostartfiles
 OBJDFLAGS   = -D --section=.text --section=.data
 
