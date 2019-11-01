@@ -15,7 +15,7 @@ To build the PyRISC-compatible RISC-V executable file, just type `make`. Note th
 
 ```
 $ make
-riscv32-unknown-elf-gcc -c -Og -march=rv32g -mabi=ilp32 -static   fib.s -o fib.o
+riscv32-unknown-elf-gcc -c -Og -march=rv32i -mabi=ilp32 -static   fib.s -o fib.o
 riscv32-unknown-elf-gcc -T./link.ld -nostdlib -nostartfiles -o fib fib.o
 ```
 
