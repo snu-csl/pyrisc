@@ -1,0 +1,15 @@
+
+loaduse:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+80000000 <_start>:
+80000000:	800102b7          	lui	t0,0x80010
+80000004:	00300f93          	li	t6,3
+80000008:	01f2a023          	sw	t6,0(t0) # 80010000 <_end+0x0>
+8000000c:	00af8f93          	addi	t6,t6,10
+80000010:	0002af83          	lw	t6,0(t0)
+80000014:	ffff8f93          	addi	t6,t6,-1
+80000018:	ffff8f93          	addi	t6,t6,-1
+8000001c:	00000073          	ecall

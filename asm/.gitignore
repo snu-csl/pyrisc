@@ -1,9 +1,3 @@
-fib
-sum100
-forward
-branch
-loaduse
 *.o
-*.objdump
 *~
 a.out

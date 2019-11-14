@@ -1,0 +1,16 @@
+
+forward:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+80000000 <_start>:
+80000000:	00000f93          	li	t6,0
+80000004:	00100293          	li	t0,1
+80000008:	00200313          	li	t1,2
+8000000c:	00300393          	li	t2,3
+80000010:	007f8fb3          	add	t6,t6,t2
+80000014:	007f8fb3          	add	t6,t6,t2
+80000018:	006f8fb3          	add	t6,t6,t1
+8000001c:	005f8fb3          	add	t6,t6,t0
+80000020:	00000073          	ecall

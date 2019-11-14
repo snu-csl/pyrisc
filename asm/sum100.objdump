@@ -1,0 +1,16 @@
+
+sum100:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+80000000 <_start>:
+80000000:	00100293          	li	t0,1
+80000004:	06400313          	li	t1,100
+80000008:	00000f93          	li	t6,0
+
+8000000c <Loop>:
+8000000c:	005f8fb3          	add	t6,t6,t0
+80000010:	00128293          	addi	t0,t0,1
+80000014:	fe535ce3          	bge	t1,t0,8000000c <Loop>
+80000018:	00000073          	ecall
