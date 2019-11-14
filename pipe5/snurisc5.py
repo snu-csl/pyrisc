@@ -74,11 +74,11 @@ def show_usage(name):
     print("\t   0: shows no output message")
     print("\t   1: dumps registers at the end of the execution")
     print("\t   2: dumps registers and memory at the end of the execution")
-    print("\t   3: 1 + shows instructions retired from the WB stage")
-    print("\t   4: 2 + shows all the instructions in the pipeline")
-    print("\t   5: 3 + shows full information for each instruction")
-    print("\t   6: 4 + dumps registers for each cycle")
-    print("\t   7: 5 + dumps data memory for each cycle")
+    print("\t   3: 2 + shows instructions retired from the WB stage")
+    print("\t   4: 3 + shows all the instructions in the pipeline")
+    print("\t   5: 4 + shows full information for each instruction")
+    print("\t   6: 5 + dumps registers for each cycle")
+    print("\t   7: 6 + dumps data memory for each cycle")
     print("\t-c shows logs after cycle m (default: 0, only effective for log level 3 or higher)")
 
 
