@@ -3,11 +3,17 @@
 
 ## Introduction
 
-This directory contains Makefile, linker script (`link.ld`), and sample RISC-V assembly code to show how to build PyRISC-compatible RISC-V executable files.
+This directory contains Makefile, linker script (`link.ld`), and sample RISC-V assembly programs to show how to build PyRISC-compatible RISC-V executable files. This directory also has several RISC-V assembly programs that can be used to verify the correctness of pipelined RISC-V simulators. Note that you are allowed to use all the RISC-V pseudo-instructions such as `li`, `mv`, `call`, `ret`, etc. supported by the GNU toolchain.
 
-## fib.s
+## RISC-V programs
 
-The file `fib.s` is a RISC-V assembly code that computes the Fibonacci number. This file shows that you are allowed to use all the RISC-V pseudo-instructions such as `li`, `mv`, `call`, `ret`, etc. supported by the GNU toolchain.
+This directory contains the following RISC-V assembly programs and their pre-compiled executable binaries.
+
+* `fib.s`: computes the Fibonacci number. 
+* `sum100.s`: computes the sum of integers from 1 to 100.
+* `forward.s`: shows a sequence of instructions that require data forwarding.
+* `branch.s`: shows a case for mispredicted branch.
+* `loaduse.s`: shows an example of load-use data hazard.
 
 ## Building the executable file
 
@@ -17,11 +23,24 @@ To build the PyRISC-compatible RISC-V executable file, just type `make`. Note th
 $ make
 riscv32-unknown-elf-gcc -c -Og -march=rv32i -mabi=ilp32 -static   fib.s -o fib.o
 riscv32-unknown-elf-gcc -T./link.ld -nostdlib -nostartfiles -o fib fib.o
+riscv32-unknown-elf-objdump -D --section=.text --section=.data fib > fib.objdump
+riscv32-unknown-elf-gcc -c -Og -march=rv32i -mabi=ilp32 -static   sum100.s -o sum100.o
+riscv32-unknown-elf-gcc -T./link.ld -nostdlib -nostartfiles -o sum100 sum100.o
+riscv32-unknown-elf-objdump -D --section=.text --section=.data sum100 > sum100.objdump
+riscv32-unknown-elf-gcc -c -Og -march=rv32i -mabi=ilp32 -static   loaduse.s -o loaduse.o
+riscv32-unknown-elf-gcc -T./link.ld -nostdlib -nostartfiles -o loaduse loaduse.o
+riscv32-unknown-elf-objdump -D --section=.text --section=.data loaduse > loaduse.objdump
+riscv32-unknown-elf-gcc -c -Og -march=rv32i -mabi=ilp32 -static   forward.s -o forward.o
+riscv32-unknown-elf-gcc -T./link.ld -nostdlib -nostartfiles -o forward forward.o
+riscv32-unknown-elf-objdump -D --section=.text --section=.data forward > forward.objdump
+riscv32-unknown-elf-gcc -c -Og -march=rv32i -mabi=ilp32 -static   branch.s -o branch.o
+riscv32-unknown-elf-gcc -T./link.ld -nostdlib -nostartfiles -o branch branch.o
+riscv32-unknown-elf-objdump -D --section=.text --section=.data branch > branch.objdump
 ```
 
 ## Running the executable file
 
-Just type `make run` to run the executable file on the __snurisc__ instruction set simulator. You can see that the `a0` register has the value 8 at the end of the simulation which is the result of `fib(5)`.
+Just type `make run` to run the executable file `fib` on the __snurisc__ instruction set simulator. You can see that the `a0` register has the value 8 at the end of the simulation which is the result of `fib(5)`.
 
 ```
 $ make run
@@ -46,11 +65,9 @@ Control transfer: 46 instructions (28.40%)
 
 ## Disassembling the executable files
 
-If you type `make objdump`, it will generate the `fib.objdump` file that disassembles the executable file.
+The disassembled files are automatically created during `make`. Please refer to `*.objdump` files.
 
 ```
-$ make objdump
-riscv32-unknown-elf-objdump -D --section=.text --section=.data fib > fib.objdump
 $ cat fib.objdump
 
 fib:     file format elf32-littleriscv

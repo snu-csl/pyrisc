@@ -11,6 +11,8 @@
 #
 #==========================================================================
 
+.SUFFIXES:  .objdump
+
 PREFIX      = riscv32-unknown-elf-
 CC	        = $(PREFIX)gcc
 CXX	        = $(PREFIX)g++
@@ -29,12 +31,32 @@ ASLFAGS     = -march=rv32i -mabi=ilp32 -static
 LDFLAGS     = -T./link.ld -nostdlib -nostartfiles
 OBJDFLAGS   = -D --section=.text --section=.data
 
-TARGET      = fib
-ASRCS       = fib.s
+TARGET      = fib sum100 loaduse forward branch
+ASRCS       = fib.s sum100.s loaduse.s forward.s branch.s
 OBJS        = $(ASRCS:.s=.o)
+DUMPS       = $(ASRCS:.s=.objdump)
 
-all: $(OBJS)
-	$(CC) $(LDFLAGS) -o $(TARGET) $(OBJS) $(LIBDIR) $(LIBS)
+all: $(TARGET)
+
+fib: fib.o
+	$(CC) $(LDFLAGS) -o $@ $< $(LIBDIR) $(LIBS)
+	$(OBJDUMP) $(OBJDFLAGS) $@ > $@.objdump    
+
+sum100: sum100.o
+	$(CC) $(LDFLAGS) -o $@ $< $(LIBDIR) $(LIBS)
+	$(OBJDUMP) $(OBJDFLAGS) $@ > $@.objdump    
+
+loaduse: loaduse.o
+	$(CC) $(LDFLAGS) -o $@ $< $(LIBDIR) $(LIBS)
+	$(OBJDUMP) $(OBJDFLAGS) $@ > $@.objdump    
+
+forward: forward.o
+	$(CC) $(LDFLAGS) -o $@ $< $(LIBDIR) $(LIBS)
+	$(OBJDUMP) $(OBJDFLAGS) $@ > $@.objdump    
+
+branch: branch.o
+	$(CC) $(LDFLAGS) -o $@ $< $(LIBDIR) $(LIBS)
+	$(OBJDUMP) $(OBJDFLAGS) $@ > $@.objdump    
 
 .s.o:
 	$(CC) -c $(CFLAGS) $(INCDIR) $< -o $@
@@ -42,14 +64,11 @@ all: $(OBJS)
 .c.s:
 	$(CC) $(CFLAGS) $(INCDIR) -S $< -o $@
 
-objdump: $(TARGET)
-	$(OBJDUMP) $(OBJDFLAGS) $(TARGET) > $(TARGET).objdump    
-
-run: $(TARGET)
-	$(PYRISC) $(PYRISCOPT) $(TARGET)
+run: fib
+	$(PYRISC) $(PYRISCOPT) $<
 
 clean:
-	$(RM) -f $(TARGET) $(TARGET).objdump $(OBJS) *~ a.out
+	$(RM) $(TARGET) $(DUMPS) $(OBJS) *~ a.out
 
 
 

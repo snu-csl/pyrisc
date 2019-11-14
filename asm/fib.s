@@ -2,7 +2,7 @@
 #
 #   The PyRISC Project
 #
-#   fib.s: Sample RISC-V Assembly Program
+#   fib.s: Computes fibonacci numbers recursively
 #
 #   Jin-Soo Kim
 #   Systems Software and Architecture Laboratory
