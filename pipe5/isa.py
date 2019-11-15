@@ -116,13 +116,13 @@ isa         = {
     LUI     : [ "lui",      LUI_MASK,   U_TYPE,   CL_ALU,   ],
     ADDI    : [ "addi",     ADDI_MASK,  I_TYPE,   CL_ALU,   ],
 
-    SLLI    : [ "slli",     SLLI_MASK,  I_TYPE,   CL_ALU,   ],
+    SLLI    : [ "slli",     SLLI_MASK,  IS_TYPE,  CL_ALU,   ],
     SLTI    : [ "slti",     SLTI_MASK,  I_TYPE,   CL_ALU,   ],
     SLTIU   : [ "sltiu",    SLTIU_MASK, I_TYPE,   CL_ALU,   ],
     XORI    : [ "xori",     XORI_MASK,  I_TYPE,   CL_ALU,   ],
-    SRLI    : [ "srli",     SRLI_MASK,  I_TYPE,   CL_ALU,   ],
+    SRLI    : [ "srli",     SRLI_MASK,  IS_TYPE,  CL_ALU,   ],
 
-    SRAI    : [ "srai",     SRAI_MASK,  I_TYPE,   CL_ALU,   ],
+    SRAI    : [ "srai",     SRAI_MASK,  IS_TYPE,  CL_ALU,   ],
     ORI     : [ "ori",      ORI_MASK,   I_TYPE,   CL_ALU,   ],
     ANDI    : [ "andi",     ANDI_MASK,  I_TYPE,   CL_ALU,   ],
     ADD     : [ "add",      ADD_MASK,   R_TYPE,   CL_ALU,   ],

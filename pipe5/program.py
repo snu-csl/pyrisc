@@ -159,6 +159,8 @@ class Program(object):
             asm = "%-7s%s, %d(%s)" % (opname, rname[rd], SWORD(imm_i), rname[rs1])
         elif info[IN_TYPE] == IJ_TYPE:
             asm = "%-7s%s, %s, %d" % (opname, rname[rd], rname[rs1], SWORD(imm_i))
+        elif info[IN_TYPE] == IS_TYPE:
+            asm = "%-7s%s, %s, %d" % (opname, rname[rd], rname[rs1], SWORD(imm_i & 0x1f))
         elif info[IN_TYPE] == U_TYPE:
             asm = "%-7s%s, 0x%05x" % (opname, rname[rd], imm_u)
         elif info[IN_TYPE] == S_TYPE:

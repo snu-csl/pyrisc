@@ -80,11 +80,12 @@ R_TYPE              = 0
 I_TYPE              = 1
 IL_TYPE             = 2     # I_TYPE, but load instruction
 IJ_TYPE             = 3     # I_TYPE, but jalr instruction
-U_TYPE              = 4
-S_TYPE              = 5
-B_TYPE              = 6
-J_TYPE              = 7
-X_TYPE              = 8
+IS_TYPE             = 4     # I_TYPE, but shift instructions
+U_TYPE              = 5
+S_TYPE              = 6
+B_TYPE              = 7
+J_TYPE              = 8
+X_TYPE              = 9
 
 
 #--------------------------------------------------------------------------

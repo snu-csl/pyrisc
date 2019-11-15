@@ -116,13 +116,13 @@ isa         = {
     LUI     : [ "lui",      LUI_MASK,   U_TYPE,  CL_ALU,  OP1_X,   OP2_IMU, ALU_ADD,  MT_X,  ],
     ADDI    : [ "addi",     ADDI_MASK,  I_TYPE,  CL_ALU,  OP1_RS1, OP2_IMI, ALU_ADD,  MT_X,  ],
 
-    SLLI    : [ "slli",     SLLI_MASK,  I_TYPE,  CL_ALU,  OP1_RS1, OP2_IMI, ALU_SLL,  MT_X,  ],
+    SLLI    : [ "slli",     SLLI_MASK,  IS_TYPE, CL_ALU,  OP1_RS1, OP2_IMI, ALU_SLL,  MT_X,  ],
     SLTI    : [ "slti",     SLTI_MASK,  I_TYPE,  CL_ALU,  OP1_RS1, OP2_IMI, ALU_SLT,  MT_X,  ],
     SLTIU   : [ "sltiu",    SLTIU_MASK, I_TYPE,  CL_ALU,  OP1_RS1, OP2_IMI, ALU_SLTU, MT_X,  ],
     XORI    : [ "xori",     XORI_MASK,  I_TYPE,  CL_ALU,  OP1_RS1, OP2_IMI, ALU_XOR,  MT_X,  ],
-    SRLI    : [ "srli",     SRLI_MASK,  I_TYPE,  CL_ALU,  OP1_RS1, OP2_IMI, ALU_SRL,  MT_X,  ],
+    SRLI    : [ "srli",     SRLI_MASK,  IS_TYPE, CL_ALU,  OP1_RS1, OP2_IMI, ALU_SRL,  MT_X,  ],
 
-    SRAI    : [ "srai",     SRAI_MASK,  I_TYPE,  CL_ALU,  OP1_RS1, OP2_IMI, ALU_SRA,  MT_X,  ],
+    SRAI    : [ "srai",     SRAI_MASK,  IS_TYPE, CL_ALU,  OP1_RS1, OP2_IMI, ALU_SRA,  MT_X,  ],
     ORI     : [ "ori",      ORI_MASK,   I_TYPE,  CL_ALU,  OP1_RS1, OP2_IMI, ALU_OR,   MT_X,  ],
     ANDI    : [ "andi",     ANDI_MASK,  I_TYPE,  CL_ALU,  OP1_RS1, OP2_IMI, ALU_AND,  MT_X,  ],
     ADD     : [ "add",      ADD_MASK,   R_TYPE,  CL_ALU,  OP1_RS1, OP2_RS2, ALU_ADD,  MT_X,  ],
