@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This directory contains Makefile, linker script (`link.ld`), and sample RISC-V assembly programs to show how to build PyRISC-compatible RISC-V executable files. This directory also has several RISC-V assembly programs that can be used to verify the correctness of pipelined RISC-V simulators. Note that you are allowed to use all the RISC-V pseudo-instructions such as `li`, `mv`, `call`, `ret`, etc. supported by the GNU toolchain.
+This directory contains Makefile and linker script (`link.ld`) to show how to build PyRISC-compatible RISC-V executable files. We also provide several sample RISC-V assembly programs that can be used to verify the correctness of pipelined RISC-V simulators. Note that you are allowed to use all the RISC-V pseudo-instructions such as `li`, `mv`, `call`, `ret`, etc. supported by the GNU toolchain.
 
 ## RISC-V programs
 
@@ -11,13 +11,13 @@ This directory contains the following RISC-V assembly programs and their pre-com
 
 * `fib.s`: computes the Fibonacci number. 
 * `sum100.s`: computes the sum of integers from 1 to 100.
-* `forward.s`: shows a sequence of instructions that require data forwarding.
+* `forward.s`: shows a sequence of instructions that have data dependences among them.
 * `branch.s`: shows a case for mispredicted branch.
 * `loaduse.s`: shows an example of load-use data hazard.
 
 ## Building the executable file
 
-To build the PyRISC-compatible RISC-V executable file, just type `make`. Note that you should build the RISC-V GNU Toolchain first as specified in the PyRISC top-level [README.md](https://github.com/snu-csl/pyrisc/blob/master/README.md) file.
+To build the PyRISC-compatible RISC-V executable file, just type `make`. Each assembly file is compiled using 32-bit RISC-V compiler that supports RV32I RISC-V instruction set. For the given object file(s), the executable binary is generated using the linker script named `link.ld`. The linker script is used to place each section in the predefined memory address. Note that you should build the RISC-V GNU Toolchain first as specified in the PyRISC top-level [README.md](https://github.com/snu-csl/pyrisc/blob/master/README.md) file.
 
 ```
 $ make
@@ -65,7 +65,7 @@ Control transfer: 46 instructions (28.40%)
 
 ## Disassembling the executable files
 
-The disassembled files are automatically created during `make`. Please refer to `*.objdump` files.
+The disassembled files are also automatically created during `make` using the `riscv32-unknown-elf-objdump` command. Please refer to `*.objdump` files.
 
 ```
 $ cat fib.objdump
