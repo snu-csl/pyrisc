@@ -13,7 +13,7 @@
 
 
 # The following program has a load-use hazard.
-# After the completing the execution, the x31 register should have the 
+# After completing the execution, the x31 register should have the 
 # value of 1.
 
     .text

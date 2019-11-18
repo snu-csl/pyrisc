@@ -13,7 +13,7 @@
 
 
 # The following program has a mispredicted branch instruction.
-# After the completing the execution, the x31 register should have the 
+# After completing the execution, the x31 register should have the 
 # value of 12 (= 0x0c).
 
     .text

@@ -13,7 +13,7 @@
 
 
 # This program computes the sum of integers from 1 to 100.
-# The x31 register should have the value of 5050 (= 0x13ba).
+# The x31 register should have the value of 5050 (= 0x13ba) at the end.
 
     .text
     .align  2
