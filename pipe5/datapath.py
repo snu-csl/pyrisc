@@ -438,14 +438,15 @@ class EX(Pipe):
     def update(self):
 
         MM.reg_pc                   = self.pc
-        MM.reg_exception            = self.exception
 
         if Pipe.CTL.MM_bubble:
             MM.reg_inst             = WORD(BUBBLE)
+            MM.reg_exception        = WORD(EXC_NONE)
             MM.reg_c_rf_wen         = False
             MM.reg_c_dmem_valid     = False
         else:
             MM.reg_inst             = self.inst
+            MM.reg_exception        = self.exception
             MM.reg_rd               = self.rd
             MM.reg_c_rf_wen         = self.c_rf_wen
             MM.reg_c_wb_sel         = self.c_wb_sel
