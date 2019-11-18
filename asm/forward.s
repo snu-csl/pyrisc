@@ -16,9 +16,9 @@
 # After successful completion, the x31 register should have the 
 # value of 9.
 
-	.text
-	.align  2
-	.globl  _start
+    .text
+    .align  2
+    .globl  _start
 _start:                         # code entry point
     li      x31, 0
     li      t0, 1

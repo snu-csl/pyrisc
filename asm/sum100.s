@@ -15,9 +15,9 @@
 # This program computes the sum of integers from 1 to 100.
 # The x31 register should have the value of 5050 (= 0x13ba).
 
-	.text
-	.align  2
-	.globl  _start
+    .text
+    .align  2
+    .globl  _start
 _start:                         # code entry point
     li      t0, 1
     li      t1, 100

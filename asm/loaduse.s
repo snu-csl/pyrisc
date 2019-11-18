@@ -16,9 +16,9 @@
 # After the completing the execution, the x31 register should have the 
 # value of 1.
 
-	.text
-	.align  2
-	.globl  _start
+    .text
+    .align  2
+    .globl  _start
 _start:                         # code entry point
     lui     t0, 0x80010
     li      x31, 3
