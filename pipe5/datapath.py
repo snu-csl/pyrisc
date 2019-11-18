@@ -388,6 +388,7 @@ class EX(Pipe):
         #   self.rs2_data           # Pipe.EX.rs2_data
         #   self.pcplus4            # Pipe.EX.pcplus4
         #
+        #   self.alu2_data          # Pipe.EX.alu2_data
         #   self.alu_out            # Pipe.EX.alu_out
         #   self.brjmp_target       # Pipe.EX.brjmp_target
         #   self.jump_reg_target    # Pipe.EX.jump_reg_target
@@ -417,11 +418,11 @@ class EX(Pipe):
         # For branch instructions, we use ALU to make comparisons between rs1 and rs2.
         # Since op2_data has an immediate value (offset) for branch instructions,
         # we change the input of ALU to rs2_data.
-        alu2    = self.rs2_data     if self.c_br_type in [ BR_NE, BR_EQ, BR_GE, BR_GEU, BR_LT, BR_LTU ] else \
-                  self.op2_data
+        self.alu2_data  = self.rs2_data     if self.c_br_type in [ BR_NE, BR_EQ, BR_GE, BR_GEU, BR_LT, BR_LTU ] else \
+                          self.op2_data
         
         # Perform ALU operation
-        self.alu_out = Pipe.cpu.alu.op(self.c_alu_fun, self.op1_data, alu2)
+        self.alu_out = Pipe.cpu.alu.op(self.c_alu_fun, self.op1_data, self.alu2_data)
 
         # Adjust the output for jalr instruction (forwarded to IF)
         self.jump_reg_target    = self.alu_out & WORD(0xfffffffe) 
@@ -460,19 +461,19 @@ class EX(Pipe):
 
         ALU_OPS = {
             ALU_X       : f'# -',
-            ALU_ADD     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} + {self.op2_data:#010x}',
-            ALU_SUB     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} - {self.op2_data:#010x}',
-            ALU_AND     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} & {self.op2_data:#010x}',
-            ALU_OR      : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} | {self.op2_data:#010x}',
-            ALU_XOR     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} ^ {self.op2_data:#010x}',
-            ALU_SLT     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} < {self.op2_data:#010x} (signed)',
-            ALU_SLTU    : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} < {self.op2_data:#010x} (unsigned)',
-            ALU_SLL     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} << {self.op2_data & 0x1f}',
-            ALU_SRL     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} >> {self.op2_data & 0x1f} (logical)',
-            ALU_SRA     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} >> {self.op2_data & 0x1f} (arithmetic)',
+            ALU_ADD     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} + {self.alu2_data:#010x}',
+            ALU_SUB     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} - {self.alu2_data:#010x}',
+            ALU_AND     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} & {self.alu2_data:#010x}',
+            ALU_OR      : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} | {self.alu2_data:#010x}',
+            ALU_XOR     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} ^ {self.alu2_data:#010x}',
+            ALU_SLT     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} < {self.alu2_data:#010x} (signed)',
+            ALU_SLTU    : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} < {self.alu2_data:#010x} (unsigned)',
+            ALU_SLL     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} << {self.alu2_data & 0x1f}',
+            ALU_SRL     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} >> {self.alu2_data & 0x1f} (logical)',
+            ALU_SRA     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} >> {self.alu2_data & 0x1f} (arithmetic)',
             ALU_COPY1   : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} (pass 1)',
-            ALU_COPY2   : f'# {self.alu_out:#010x} <- {self.op2_data:#010x} (pass 2)',
-            ALU_SEQ     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} == {self.op2_data:#010x}',
+            ALU_COPY2   : f'# {self.alu_out:#010x} <- {self.alu2_data:#010x} (pass 2)',
+            ALU_SEQ     : f'# {self.alu_out:#010x} <- {self.op1_data:#010x} == {self.alu2_data:#010x}',
         }
         return('# -' if self.inst == BUBBLE else ALU_OPS[self.c_alu_fun]);
 
