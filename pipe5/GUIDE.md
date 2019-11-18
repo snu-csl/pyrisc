@@ -124,7 +124,7 @@ In the above example, even if the value of `EX.reg_rd` is changed during `ID.upd
 Assume that we have an entry called `exception` in the MM pipeline registers that sit between the EX stage and the MM stage. This signal needs to be delivered to the WB stage. However, during the MM stage, this signal can be modified due to any exception in the data memory (dmem) access. The following figure shows this situation.
 
 ```
- --- EX stage ---     MM pipeline registers    --- MM stage --      WB pipeline registers
+ --- EX stage ---     MM pipeline registers    --- MM stage --     WB pipeline registers
                      +--------------------+                       +--------------------+
                      |         ...        |  +-self.exception     |         ...        |
                      +--------------------+  |    +-------+       +--------------------+
