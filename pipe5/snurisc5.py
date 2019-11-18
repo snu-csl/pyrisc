@@ -126,18 +126,18 @@ def parse_args(args):
 
 def main():
 
-    filename = parse_args(sys.argv)
-    if not filename:
+    filename = parse_args(sys.argv)         # parse arguments
+    if not filename:                        # if parse error, exit
         show_usage(sys.argv[0])
         sys.exit()
 
-    cpu = SNURISC5()
-    prog = Program()
-    entry_point = prog.load(cpu, filename)
-    if not entry_point:
+    cpu = SNURISC5()                        # make a CPU instance with hw components
+    prog = Program()                        # make a program instance
+    entry_point = prog.load(cpu, filename)  # load a program
+    if not entry_point:                     # if no entry point, exit
         sys.exit()
-    cpu.run(entry_point)
-    Stat.show()
+    cpu.run(entry_point)                    # run the program starting from entry_point
+    Stat.show()                             # show stats
 
 
 if __name__ == '__main__':
