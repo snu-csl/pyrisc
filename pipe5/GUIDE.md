@@ -80,23 +80,23 @@ The `run()` method in the `Pipe` class is the actual simulation loop. First, it 
 
 Each stage consists of two _phases_, namely, `compute()` and `update()`. For any stage `S`, `S.compute()` represents the manipulation of signals using some combinational logic performed inside of the stage, while `S.update()` indicates the step where the contents of the pipeline registers (between the current and the next stage) are updated. In the real processor, all the `*.compute()` phases are performed in parallel and all the state updates specified in `*.update()` are done at once (e.g., on the rising edge of the clock). However, we just serialize the execution of `*.compute()` and `*.update()` to simplify the simulator.
 
-Note that we run each stage in the reverse order of the pipeline, especially for the `*.compute()` phases. This is because that hazard detection and forwarding detection logic depends on the previous instructions in the pipeline. For example, the forwarding logic in the ID stage depends on the signals in the EX, MM, WB stages, hence EX, MM, WB stages should run before ID. Similarly, the branch outcome is determined in the EX stage which means that the EX stage should be completed before the IF stage. For these reasons, it is safe to run each stage in the reverse order such as WB -> MM -> EX -> ID -> IF. Because all the internal signals are already generated during `*.compute()` phases, the execution of `*.update()` phases can be done in any order, but we run them sequentially from ID to WB.
+Note that we run each stage in the reverse order of the pipeline, especially for the `*.compute()` phases. This is because that hazard detection and forwarding detection logic depends on the previous instructions in the pipeline. For example, the forwarding logic in the ID stage depends on the signals in the EX, MM, WB stages, hence EX, MM, WB stages should be run before ID. Similarly, the branch outcome is determined in the EX stage which means that the EX stage should be completed before the IF stage. For these reasons, it is safe to run each stage in the reverse order such as WB -> MM -> EX -> ID -> IF. Because all the internal signals are already generated during `*.compute()` phases, the execution of `*.update()` phases can be done in any order, but we run them sequentially from ID to WB.
 
 
 ## Naming conventions
 
 ### Pipeline registers
 
-In `snurisc5`, pipeline registers are implemented as class variables. For each stage, we have a class definition, such as `IF`, `ID`, `EX`, `MM`, or `WB`. For class variables, their values can be referenced directly by prefixing the class name to the variable name. In addition, we always add the prefix `reg_` to the names of pipeline registers. For example, `EX.reg_rd` represents the register named `reg_rd` in the set of pipeline registers between the ID and the EX stages.
+In `snurisc5`, pipeline registers are implemented as class variables. For each stage, we have a class definition, such as `IF`, `ID`, `EX`, `MM`, or `WB`. For class variables, their values can be referenced directly by prefixing the class name to the variable name. In addition, we always add the prefix `reg_` to the names of pipeline registers to explicitly denote they belong to the pipeline registers. For example, `EX.reg_rd` represents the register named `reg_rd` in the set of pipeline registers between the ID and the EX stages.
 
 ### Internal signals within a stage
 
-Internal signals used within a stage are implemented as instance variables in the corresponding object. For example, `self.rd` indicates a internal signal named `rd`. As they are instance variables, the same signal can be freely used either in `compute()` or in `update()`. Also it is possible that two different stages can define their own `self.rd` variables because each stage is represented by a different object. Recall that `Pipe.IF`, `Pipe.ID`, `Pipe.EX`, `Pipe.MM`, and `Pipe.WB` point to each _object_ that corresponds to each stage. Therefore, the `self.rd` defined in the ID stage (i.e., in the `Pipe.ID` object) can be referenced as `Pipe.ID.rd`. Likewise, `Pipe.EX.rd` represents the `self.rd` variable defined in the EX stage (i.e., in the `Pipe.EX` object).
+Internal signals used within a stage are implemented as instance variables in the corresponding object. For example, `self.rd` indicates an internal signal named `rd`. As they are instance variables, the same signal can be freely used either in `compute()` or in `update()`. Also it is possible that two different stages can define their own `self.rd` variables because each stage is represented by a different object. Recall that `Pipe.IF`, `Pipe.ID`, `Pipe.EX`, `Pipe.MM`, and `Pipe.WB` point to each _object_ that corresponds to each stage. Therefore, the `self.rd` defined in the ID stage (i.e., in the `Pipe.ID` object) can be referenced as `Pipe.ID.rd`. Likewise, `Pipe.EX.rd` represents the `self.rd` variable defined in the EX stage (i.e., in the `Pipe.EX` object).
 
 The following highlights the differences between pipeline registers and internal signals.
 ```
-Pipe.EX.reg_rd      # A pipeline register bewteen ID and EX. Always start with 'reg_'.
-Pipe.EX.rd          # An internal signal within EX. Called as `self.rd` within the stage.
+EX.reg_rd      # A pipeline register between ID and EX. Always start with 'reg_'.
+Pipe.EX.rd     # An internal signal within EX. Can be referenced as `self.rd` within the EX stage.
 ```
 
 ## Usage conventions
@@ -111,7 +111,7 @@ MM.reg_rd = EX.reg_rd               # Wrong example
 But the problem is that `EX.reg_rd` is also a pipeline register and its value can be updated in `ID.update()` before `MM.reg_rd`. In this case, the previous value of `EX.reg_rd` will be lost. For this reason, it is always safer if you read out the value of `EX.reg_rd` to an internal signal first and use this signal to update the pipeline register, as shown below.
 ```
 # In EX.compute()
-self.rd = EX.reg_rd  # Read out the pipeline register to the internal signal
+self.rd = EX.reg_rd  # Read out the pipeline register to an internal signal
 
 # In EX.update()
 MM.reg_rd = self.rd  # Update the pipeline register using the internal signal
@@ -136,7 +136,7 @@ self.exception  ---->| (MM.reg_exception) |------>|       |------>| (WB.reg_exce
                      |         ...        |           | status    |                    |
 ```
 
-The above situation can implemented as follows in the `snurisc5` simulator.
+The above situation can implemented as follows:
 
 1. Read out the value of the pipeline register and stores it in the internal signal
 ```
@@ -150,7 +150,7 @@ The above situation can implemented as follows in the `snurisc5` simulator.
     if not status:
         self.exception |= EXC_DMEM_ERROR
 ```
-3. Deliver to the WB pipeline register
+3. Deliver it to the WB pipeline register
 ```
 # In MM.update()
     WB.reg_exception = self.exception
