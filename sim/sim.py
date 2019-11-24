@@ -108,16 +108,18 @@ class Sim(object):
                       WORD(0)
 
         
-        alu_out     = WORD(alu1 + alu2)                     if (cs[IN_OP] == ALU_ADD)    else \
-                      WORD(alu1 - alu2)                     if (cs[IN_OP] == ALU_SUB)    else \
-                      WORD(alu1 & alu2)                     if (cs[IN_OP] == ALU_AND)    else \
-                      WORD(alu1 | alu2)                     if (cs[IN_OP] == ALU_OR)     else \
-                      WORD(alu1 ^ alu2)                     if (cs[IN_OP] == ALU_XOR)    else \
-                      SWORD(alu1) < SWORD(alu2)             if (cs[IN_OP] == ALU_SLT)    else \
-                      WORD(alu1) < WORD(alu2)               if (cs[IN_OP] == ALU_SLTU)   else \
-                      WORD(alu1 << (alu2 & 0x1f))           if (cs[IN_OP] == ALU_SLL)    else \
-                      WORD(SWORD(alu1) >> (alu2 & 0x1f))    if (cs[IN_OP] == ALU_SRA)    else \
-                      WORD(alu1 >> (alu2 & 0x1f))           if (cs[IN_OP] == ALU_SRL)    else \
+        alu_out     = WORD(alu1 + alu2)                     if (cs[IN_OP] == ALU_ADD)           else \
+                      WORD(alu1 - alu2)                     if (cs[IN_OP] == ALU_SUB)           else \
+                      WORD(alu1 & alu2)                     if (cs[IN_OP] == ALU_AND)           else \
+                      WORD(alu1 | alu2)                     if (cs[IN_OP] == ALU_OR)            else \
+                      WORD(alu1 ^ alu2)                     if (cs[IN_OP] == ALU_XOR)           else \
+                      WORD(1)                               if (cs[IN_OP] == ALU_SLT and             \
+                                                                (SWORD(alu1) < SWORD(alu2)))    else \
+                      WORD(1)                               if (cs[IN_OP] == ALU_SLTU and            \
+                                                                (alu1 < alu2))                  else \
+                      WORD(alu1 << (alu2 & 0x1f))           if (cs[IN_OP] == ALU_SLL)           else \
+                      WORD(SWORD(alu1) >> (alu2 & 0x1f))    if (cs[IN_OP] == ALU_SRA)           else \
+                      WORD(alu1 >> (alu2 & 0x1f))           if (cs[IN_OP] == ALU_SRL)           else \
                       WORD(0)
 
         pc_next     = pc + 4
