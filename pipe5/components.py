@@ -153,9 +153,9 @@ class ALU(object):
         elif alufun == ALU_XOR:
             output = WORD(alu1 ^ alu2)
         elif alufun == ALU_SLT:
-            output = SWORD(alu1) < SWORD(alu2)
+            output = WORD(1) if SWORD(alu1) < SWORD(alu2) else WORD(0)
         elif alufun == ALU_SLTU:
-            output = alu1 < alu2
+            output = WORD(1) if alu1 < alu2 else WORD(0)
         elif alufun == ALU_SLL:
             output = WORD(alu1 << (alu2 & 0x1f))
         elif alufun == ALU_SRA:
@@ -167,7 +167,7 @@ class ALU(object):
         elif alufun == ALU_COPY2:
             output = alu2
         elif alufun == ALU_SEQ:
-            output = (alu1 == alu2)
+            output = WORD(1) if (alu1 == alu2) else WORD(0)
         else:
             output = WORD(0)
 
