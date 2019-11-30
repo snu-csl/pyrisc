@@ -379,7 +379,7 @@ class EX(Pipe):
         #   self.rd                 # Pipe.EX.rd
         #   self.c_rf_wen           # Pipe.EX.c_rf_wen
         #   self.c_wb_sel           # Pipe.EX.c_wb_sel
-        #   self.c_dmem_en          # Pipe.EX.c_dmem_valid
+        #   self.c_dmem_en          # Pipe.EX.c_dmem_en
         #   self.c_dmem_rw          # Pipe.EX.c_dmem_fcn
         #   self.c_br_type          # Pipe.EX.c_br_type
         #   self.c_alu_fun          # Pipe.EX.c_alu_fun
@@ -447,7 +447,7 @@ class EX(Pipe):
         if Pipe.CTL.MM_bubble:
             MM.reg_inst             = WORD(BUBBLE)
             MM.reg_c_rf_wen         = False
-            MM.reg_c_dmem_valid     = False
+            MM.reg_c_dmem_en        = False
         else:
             MM.reg_inst             = self.inst
             MM.reg_rd               = self.rd
