@@ -150,11 +150,11 @@ class Control(object):
         # Control signal for forwarding rs1 value to op1_data
         # The c_rf_wen signal can be disabled when we have an exception during dmem access,
         # so Pipe.MM.c_rf_wen should be used instead of MM.reg_c_rf_wen.
-        self.fwd_op1        =   FWD_EX      if (EX.reg_rd == Pipe.ID.rs1) and               \
+        self.fwd_op1        =   FWD_EX      if (EX.reg_rd == Pipe.ID.rs1) and rs1_oen and   \
                                                (EX.reg_rd != 0) and EX.reg_c_rf_wen else    \
-                                FWD_MM      if (MM.reg_rd == Pipe.ID.rs1) and               \
+                                FWD_MM      if (MM.reg_rd == Pipe.ID.rs1) and rs1_oen and   \
                                                (MM.reg_rd != 0) and Pipe.MM.c_rf_wen else   \
-                                FWD_WB      if (WB.reg_rd == Pipe.ID.rs1) and               \
+                                FWD_WB      if (WB.reg_rd == Pipe.ID.rs1) and rs1_oen and   \
                                                (WB.reg_rd != 0) and WB.reg_c_rf_wen else    \
                                 FWD_NONE
 
@@ -171,11 +171,11 @@ class Control(object):
                                 FWD_NONE
 
         # Control signal for forwarding rs2 value to rs2_data
-        self.fwd_rs2        =   FWD_EX      if (EX.reg_rd == Pipe.ID.rs2) and               \
+        self.fwd_rs2        =   FWD_EX      if (EX.reg_rd == Pipe.ID.rs2) and rs2_oen and   \
                                                (EX.reg_rd != 0) and EX.reg_c_rf_wen  else   \
-                                FWD_MM      if (MM.reg_rd == Pipe.ID.rs2) and               \
+                                FWD_MM      if (MM.reg_rd == Pipe.ID.rs2) and rs2_oen and   \
                                                (MM.reg_rd != 0) and Pipe.MM.c_rf_wen else   \
-                                FWD_WB      if (WB.reg_rd == Pipe.ID.rs2) and               \
+                                FWD_WB      if (WB.reg_rd == Pipe.ID.rs2) and rs2_oen and   \
                                                (WB.reg_rd != 0) and WB.reg_c_rf_wen  else   \
                                 FWD_NONE
 
