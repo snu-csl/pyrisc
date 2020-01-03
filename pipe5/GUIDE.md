@@ -136,7 +136,7 @@ self.exception  ---->| (MM.reg_exception) |------>|       |------>| (WB.reg_exce
                      |         ...        |           | status    |                    |
 ```
 
-The above situation can implemented as follows:
+The above situation can be implemented as follows:
 
 1. Read out the value of the pipeline register and stores it in the internal signal
 ```
