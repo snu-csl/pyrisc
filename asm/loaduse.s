@@ -27,7 +27,7 @@ _start:                         # code entry point
     lw      x31, 0(t0)
     addi    x31, x31, -1
     addi    x31, x31, -1
-    ecall
+    ebreak
     
 
 

@@ -54,7 +54,7 @@ class Sim(object):
         # Handle exceptions, if any
         if (status & EXC_DMEM_ERROR):
             print("Exception '%s' occurred at 0x%08x -- Program terminated" % (EXC_MSG[EXC_DMEM_ERROR], Sim.cpu.pc.read()))
-        elif (status & EXC_ECALL):
+        elif (status & EXC_EBREAK):
             print("Execution completed")
         elif (status & EXC_ILLEGAL_INST):
             print("Exception '%s' occurred at 0x%08x -- Program terminated" % (EXC_MSG[EXC_ILLEGAL_INST], Sim.cpu.pc.read()))
@@ -164,9 +164,9 @@ class Sim(object):
 
         Stat.inst_ctrl += 1
 
-        if inst == ECALL:
+        if inst in [ EBREAK, ECALL ]:
             Sim.log(pc, inst, 0, 0, 0) 
-            return EXC_ECALL
+            return EXC_EBREAK
 
         rs1             = RISCV.rs1(inst)
         rs2             = RISCV.rs2(inst)

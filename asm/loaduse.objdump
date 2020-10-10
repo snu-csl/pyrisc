@@ -12,4 +12,4 @@ Disassembly of section .text:
 80000010:	0002af83          	lw	t6,0(t0)
 80000014:	ffff8f93          	addi	t6,t6,-1
 80000018:	ffff8f93          	addi	t6,t6,-1
-8000001c:	00000073          	ecall
+8000001c:	00100073          	ebreak

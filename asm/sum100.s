@@ -26,5 +26,5 @@ Loop:
     add     x31, x31, t0
     addi    t0, t0, 1
     ble     t0, t1, Loop
-    ecall
+    ebreak
 

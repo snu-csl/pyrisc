@@ -28,6 +28,6 @@ _start:                         # code entry point
     add     x31, x31, t2
     add     x31, x31, t1
     add     x31, x31, t0
-    ecall
+    ebreak
 
 

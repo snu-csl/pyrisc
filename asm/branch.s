@@ -29,7 +29,7 @@ _start:                         # code entry point
 Exit:
     addi    x31, x31, 4
     addi    x31, x31, 8
-    ecall
+    ebreak
     
 
 

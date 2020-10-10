@@ -17,14 +17,14 @@ Among the 40 instructions defined in the RV32I base instruction set, __snurisc5_
 
 ### Special Instruction
 
-* `ecall`: The `ecall` instruction is originally used to make a service request to the execution environment. In __snurisc5__, we use the `ecall` instruction to stop the execution of the simulator.
+* `ebreak`: The `ebreak` instruction is used to return control to a debugging environment. In __snurisc5__, we use the `ebreak` instruction to stop the execution of the simulator.
 
 ### Unsupported Instructions
 
 The following RV32I instructions are not supported in __snurisc5__:
 
 * `fence`: The `fence` instruction is used to order device I/O and memory accesses.
-* `ebreak`: The `ebreak` instruction is used to return control to a debugging environment.
+* `ecall`: The `ecall` instruction is originally used to make a service request to the execution environment. 
 
 ### Unimplemented Instructions
 
@@ -146,46 +146,46 @@ Loading file ../asm/loaduse
 7 [MM] 0x80000010: lw     t6, 0(t0)              # 0x00000003 <- M[0x80010000]
 7 [WB] 0x8000000c: addi   t6, t6, 10             # R[31] <- 0x0000000d
 --------------------------------------------------
-8 [IF] 0x8000001c: ecall                         # inst=0x00000073, pc_next=0x80000020
+8 [IF] 0x8000001c: ebreak                        # inst=0x00100073, pc_next=0x80000020
 8 [ID] 0x80000018: addi   t6, t6, -1             # rd=31 rs1=31 rs2=31 op1=0x00000002 op2=0xffffffff
 8 [EX] 0x80000014: addi   t6, t6, -1             # 0x00000002 <- 0x00000003 + 0xffffffff
 8 [MM] 0x80000014: BUBBLE                        # -
 8 [WB] 0x80000010: lw     t6, 0(t0)              # R[31] <- 0x00000003
 --------------------------------------------------
 9 [IF] 0x80000020: (illegal)                     # inst=0x00000000, pc_next=0x80000024
-9 [ID] 0x8000001c: ecall                         # rd=0 rs1=0 rs2=0 op1=0x00000000 op2=0x00000000
+9 [ID] 0x8000001c: ebreak                        # rd=0 rs1=0 rs2=1 op1=0x00000000 op2=0x00000000
 9 [EX] 0x80000018: addi   t6, t6, -1             # 0x00000001 <- 0x00000002 + 0xffffffff
 9 [MM] 0x80000014: addi   t6, t6, -1             # -
 9 [WB] 0x80000014: BUBBLE                        # -
 --------------------------------------------------
 10 [IF] 0x80000024: (illegal)                     # inst=0x00000000, pc_next=0x80000028
 10 [ID] 0x80000020: BUBBLE                        # -
-10 [EX] 0x8000001c: ecall                         # -
+10 [EX] 0x8000001c: ebreak                        # -
 10 [MM] 0x80000018: addi   t6, t6, -1             # -
 10 [WB] 0x80000014: addi   t6, t6, -1             # R[31] <- 0x00000002
 --------------------------------------------------
 11 [IF] 0x80000028: (illegal)                     # inst=0x00000000, pc_next=0x8000002c
 11 [ID] 0x80000024: BUBBLE                        # -
 11 [EX] 0x80000020: BUBBLE                        # -
-11 [MM] 0x8000001c: ecall                         # -
+11 [MM] 0x8000001c: ebreak                        # -
 11 [WB] 0x80000018: addi   t6, t6, -1             # R[31] <- 0x00000001
 --------------------------------------------------
 12 [IF] 0x8000002c: (illegal)                     # inst=0x00000000, pc_next=0x80000030
 12 [ID] 0x80000028: BUBBLE                        # -
 12 [EX] 0x80000024: BUBBLE                        # -
 12 [MM] 0x80000020: BUBBLE                        # -
-12 [WB] 0x8000001c: ecall                         # -
+12 [WB] 0x8000001c: ebreak                        # -
 Execution completed
 Registers
 =========
-zero ($0): 0x00000000    ra ($1):   0x00000000    sp ($2):   0x00000000    gp ($3):   0x00000000
-tp ($4):   0x00000000    t0 ($5):   0x80010000    t1 ($6):   0x00000000    t2 ($7):   0x00000000
-s0 ($8):   0x00000000    s1 ($9):   0x00000000    a0 ($10):  0x00000000    a1 ($11):  0x00000000
-a2 ($12):  0x00000000    a3 ($13):  0x00000000    a4 ($14):  0x00000000    a5 ($15):  0x00000000
-a6 ($16):  0x00000000    a7 ($17):  0x00000000    s2 ($18):  0x00000000    s3 ($19):  0x00000000
-s4 ($20):  0x00000000    s5 ($21):  0x00000000    s6 ($22):  0x00000000    s7 ($23):  0x00000000
-s8 ($24):  0x00000000    s9 ($25):  0x00000000    s10 ($26): 0x00000000    s11 ($27): 0x00000000
-t3 ($28):  0x00000000    t4 ($29):  0x00000000    t5 ($30):  0x00000000    t6 ($31):  0x00000001
+zero ($0): 0x00000000    ra ($1):   0x00000000    sp ($2):   0x00000000    gp ($3):   0x00000000    
+tp ($4):   0x00000000    t0 ($5):   0x80010000    t1 ($6):   0x00000000    t2 ($7):   0x00000000    
+s0 ($8):   0x00000000    s1 ($9):   0x00000000    a0 ($10):  0x00000000    a1 ($11):  0x00000000    
+a2 ($12):  0x00000000    a3 ($13):  0x00000000    a4 ($14):  0x00000000    a5 ($15):  0x00000000    
+a6 ($16):  0x00000000    a7 ($17):  0x00000000    s2 ($18):  0x00000000    s3 ($19):  0x00000000    
+s4 ($20):  0x00000000    s5 ($21):  0x00000000    s6 ($22):  0x00000000    s7 ($23):  0x00000000    
+s8 ($24):  0x00000000    s9 ($25):  0x00000000    s10 ($26): 0x00000000    s11 ($27): 0x00000000    
+t3 ($28):  0x00000000    t4 ($29):  0x00000000    t5 ($30):  0x00000000    t6 ($31):  0x00000001    
 Memory 0x80010000 - 0x8001ffff
 ==============================
 0x80010000:  03 00 00 00  (0x00000003)

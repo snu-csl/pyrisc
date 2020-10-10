@@ -233,36 +233,17 @@ MT_WU               = 7         # word (unsigned)
 #   Exceptions
 #--------------------------------------------------------------------------
 
-EXC_NONE            = 0         # EXC_NONE should be zero
-EXC_IMEM_ERROR      = 1
-EXC_DMEM_ERROR      = 2
-EXC_ILLEGAL_INST    = 4
-EXC_ECALL           = 8
-
-EXC_MSG = {         EXC_IMEM_ERROR:     "imem access error",
-                    EXC_DMEM_ERROR:     "dmem access error",
-                    EXC_ILLEGAL_INST:   "illegal instruction",
-                    EXC_ECALL:          "ecall",
-}
-
-
-
-
-
-
-
-
 # Multiple exceptions can occur. So they should be a bit vector.
 EXC_NONE            = 0         # EXC_NONE should be zero
 EXC_IMEM_ERROR      = 1
 EXC_DMEM_ERROR      = 2
 EXC_ILLEGAL_INST    = 4
-EXC_ECALL           = 8
+EXC_EBREAK          = 8
 
 EXC_MSG = {         EXC_IMEM_ERROR:     "imem access error", 
                     EXC_DMEM_ERROR:     "dmem access error",
                     EXC_ILLEGAL_INST:   "illegal instruction",
-                    EXC_ECALL:          "ecall",
+                    EXC_EBREAK:         "ebreak",
           }
 
 # Forwarding source

@@ -15,4 +15,4 @@ Disassembly of section .text:
 80000018 <Exit>:
 80000018:	004f8f93          	addi	t6,t6,4
 8000001c:	008f8f93          	addi	t6,t6,8
-80000020:	00000073          	ecall
+80000020:	00100073          	ebreak

@@ -17,14 +17,14 @@ Among the 40 instructions defined in the RV32I base instruction set, __snurisc__
 
 ### Special Instruction
 
-* `ecall`: The `ecall` instruction is originally used to make a service request to the execution environment. In __snurisc__, we use the `ecall` instruction to stop the execution of the simulator.
+* `ebreak`: The `ebreak` instruction is used to return control to a debugging environment. In __snurisc__, we use the `ebreak` instruction to stop the execution of the simulator.
 
 ### Unsupported Instructions
 
 The following RV32I instructions are not supported in __snurisc__:
 
 * `fence`: The `fence` instruction is used to order device I/O and memory accesses.
-* `ebreak`: The `ebreak` instruction is used to return control to a debugging environment.
+* `ecall`: The `ecall` instruction is originally used to make a service request to the execution environment. We reserve this instruction to simulate some of system calls in a future extension.
 
 ### Unimplemented Instructions
 

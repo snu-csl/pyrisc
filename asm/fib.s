@@ -26,7 +26,7 @@ _start:                         # code entry point
     lui     sp, 0x80020         # set the stack pointer to 0x80020000
     li      a0, 5               # set the argument
     call    fib                 # call fib(5)
-    ecall                       # terminate the program
+    ebreak                      # terminate the program
 
 fib:
     li      a5, 1               # a5 <- 1

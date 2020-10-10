@@ -63,6 +63,7 @@ csignals = {
 
     BGEU   : [ Y, BR_GEU, OP1_RS1, OP2_IMB, OEN_1, OEN_1, ALU_SLTU , WB_X  , REN_0, MEN_0, M_X  , MT_X, ],
     ECALL  : [ Y, BR_N  , OP1_X  , OP2_X  , OEN_0, OEN_0, ALU_X    , WB_X  , REN_0, MEN_0, M_X  , MT_X, ],
+    EBREAK : [ Y, BR_N  , OP1_X  , OP2_X  , OEN_0, OEN_0, ALU_X    , WB_X  , REN_0, MEN_0, M_X  , MT_X, ],
 }
 
 
@@ -108,8 +109,8 @@ class Control(object):
         from datapath import Pipe, EX, MM, WB
 
         opcode = RISCV.opcode(inst)
-        if opcode == ECALL:
-            Pipe.ID.exception |= EXC_ECALL
+        if opcode in [ EBREAK, ECALL ]:
+            Pipe.ID.exception |= EXC_EBREAK
         elif opcode == ILLEGAL:
             Pipe.ID.exception |= EXC_ILLEGAL_INST
             inst = BUBBLE
@@ -201,8 +202,8 @@ class Control(object):
         # This is because the instruction can be cancelled while it is in IF and ID due to mispredicted 
         # branch/jump, in which case it should not cause any exception. We just keep track of the exception 
         # state with the instruction along the pipeline until EX. If the instruction survives EX, it is 
-        # safe to make the instruction and any following instructions bubble (except for ECALL)
-        self.MM_bubble = (Pipe.EX.exception and (Pipe.EX.exception != EXC_ECALL)) or (Pipe.MM.exception)
+        # safe to make the instruction and any following instructions bubble (except for EBREAK)
+        self.MM_bubble = (Pipe.EX.exception and (Pipe.EX.exception != EXC_EBREAK)) or (Pipe.MM.exception)
        
         if inst == BUBBLE:
             return False

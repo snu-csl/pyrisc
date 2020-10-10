@@ -13,4 +13,4 @@ Disassembly of section .text:
 80000014:	007f8fb3          	add	t6,t6,t2
 80000018:	006f8fb3          	add	t6,t6,t1
 8000001c:	005f8fb3          	add	t6,t6,t0
-80000020:	00000073          	ecall
+80000020:	00100073          	ebreak

@@ -13,4 +13,4 @@ Disassembly of section .text:
 8000000c:	005f8fb3          	add	t6,t6,t0
 80000010:	00128293          	addi	t0,t0,1
 80000014:	fe535ce3          	bge	t1,t0,8000000c <Loop>
-80000018:	00000073          	ecall
+80000018:	00100073          	ebreak

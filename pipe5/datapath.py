@@ -99,7 +99,7 @@ class Pipe(object):
         # Handle exceptions, if any
         if (Pipe.WB.exception & EXC_DMEM_ERROR):
             print("Exception '%s' occurred at 0x%08x -- Program terminated" % (EXC_MSG[EXC_DMEM_ERROR], Pipe.WB.pc))
-        elif (Pipe.WB.exception & EXC_ECALL):
+        elif (Pipe.WB.exception & EXC_EBREAK):
             print("Execution completed")
         elif (Pipe.WB.exception & EXC_ILLEGAL_INST):
             print("Exception '%s' occurred at 0x%08x -- Program terminated" % (EXC_MSG[EXC_ILLEGAL_INST], Pipe.WB.pc))
