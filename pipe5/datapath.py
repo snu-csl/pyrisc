@@ -324,7 +324,6 @@ class ID(Pipe):
             EX.reg_op2_data         = self.op2_data
             EX.reg_rs2_data         = self.rs2_data
             EX.reg_c_br_type        = Pipe.CTL.br_type
-            EX.reg_c_op2_sel        = Pipe.CTL.op2_sel
             EX.reg_c_alu_fun        = Pipe.CTL.alu_fun
             EX.reg_c_wb_sel         = Pipe.CTL.wb_sel
             EX.reg_c_rf_wen         = Pipe.CTL.rf_wen
