@@ -181,9 +181,7 @@ class Control(object):
                                 FWD_NONE
 
         # Check for load-use data hazard
-        EX_opcode = RISCV.opcode(EX.reg_inst)
-        EX_cs = csignals[EX_opcode]
-        EX_load_inst = EX_cs[CS_MEM_EN] and EX_cs[CS_MEM_FCN] == M_XRD
+        EX_load_inst = EX.reg_c_dmem_en and EX.reg_c_dmem_rw == M_XRD
         load_use_hazard     = (EX_load_inst and EX.reg_rd != 0) and             \
                               ((EX.reg_rd == Pipe.ID.rs1 and rs1_oen) or        \
                                (EX.reg_rd == Pipe.ID.rs2 and rs2_oen))
