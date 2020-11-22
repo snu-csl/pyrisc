@@ -12,7 +12,7 @@ This file describes the internal architecture and implementation details of the 
 
 The `snurisc5` simulator consists of the following files written in Python.
 
-* `snurisc5.py`: This is a main file that accepts and parses arguments from the user. Also, the `main()` function in this file controls the overall simulation.
+* `snurisc5.py`: This is the main file that accepts and parses arguments from the user. Also, the `main()` function in this file controls the overall simulation.
 * `program.py`: The main function of this file is to load the contents of the input RISC-V executable file to the instruction memory (`load()`). It also provides the `disasm()` function that is used to disassemble the given 32-bit binary instruction word to the corresponding assembly code in a textual form. The disassembled code is stored in the `AsmCache` using the program counter (`pc`) value as a key to avoid the repeated disassembling for the same instruction.
 * `datapath.py`: This file contains the datapath information for each stage.
 * `control.py`: This file contains the control logic.

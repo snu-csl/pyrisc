@@ -40,7 +40,7 @@ The target machine is assumed to have separate Instruction Memory (imem) and Dat
 
 The pipeline implementation of __snurisc5__ is based on a standard 5-stage pipelining architecture consisting of IF (Instruction Fetch), ID (Instruction Decode), EX (Execution), MM (Memory), and WB (Write Back) stages. The overall simulation architecture is inspired by the educational [Y86-64 processor simulator](http://csapp.cs.cmu.edu/3e/simguide.pdf) developed by Randal E. Bryant and David O. Hallaron. The internal microarchitecture of the 5-stage pipeline is largely based on the [riscv-sodor](https://github.com/ucb-bar/riscv-sodor) project, which provides educational microarchitectures for RISC-V ISA developed by UC Berkeley's Architecture Group. For overall pipeline architecture, please refer to the `snurisc5.pdf` file in this directory.
 
-## Differences from Textbook's 5-stage pipeline
+## Differences from the Textbook's 5-stage pipeline
 
 The textbook, _Computer Organization and Design: RISC-V Edition_ (by David A. Patterson and John L. Hennessy, COD for short), shows an example of 5-stage RISC-V processor implementation for a subset of instructions such as `ld`, `sd`, `add`, `sub`, `and`, `or`, and `beq`. Please note that the implementation of __snurisc5__ has the following differences compared with the COD book.
 
@@ -67,13 +67,12 @@ Usage: ./snurisc5.py [-l n] [-c m] filename
            0: shows no output message
            1: dumps registers at the end of the execution
            2: dumps registers and memory at the end of the execution
-           3: 1 + shows instructions retired from the WB stage
-           4: 2 + shows all the instructions in the pipeline
-           5: 3 + shows full information for each instruction
-           6: 4 + dumps registers for each cycle
-           7: 5 + dumps data memory for each cycle
+           3: 2 + shows instructions retired from the WB stage
+           4: 3 + shows all the instructions in the pipeline
+           5: 4 + shows full information for each instruction
+           6: 5 + dumps registers for each cycle
+           7: 6 + dumps data memory for each cycle
         -c shows logs after cycle m (default: 0, only effective for log level 3 or higher)
-
 ```
 
 ## Building an Executable File
