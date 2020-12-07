@@ -104,7 +104,7 @@ class Memory(object):
 
         if (not valid):                    
             res = [ WORD(0), True ]
-        elif (WORD(addr) < self.mem_start) or (WORD(addr) >= self.mem_end) or \
+        elif (addr < self.mem_start) or (addr >= self.mem_end) or \
             addr % self.word_size != 0:
             res = [ WORD(0) , False ]
         elif fcn == M_XRD:
