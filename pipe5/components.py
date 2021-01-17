@@ -103,18 +103,18 @@ class Memory(object):
     def access(self, valid, addr, data, fcn):
 
         if (not valid):                    
-            res = [ WORD(0), True ]
+            res = ( WORD(0), True )
         elif (addr < self.mem_start) or (addr >= self.mem_end) or \
             addr % self.word_size != 0:
-            res = [ WORD(0) , False ]
+            res = ( WORD(0) , False )
         elif fcn == M_XRD:
             val = self.mem[(addr - self.mem_start) // self.word_size]
-            res = [ val, True ]
+            res = ( val, True )
         elif fcn == M_XWR:
             self.mem[(addr - self.mem_start) // self.word_size] = WORD(data) 
-            res = [ WORD(0), True ]
+            res = ( WORD(0), True )
         else:
-            res = [ WORD(0), False ]
+            res = ( WORD(0), False )
 
         return res
 
