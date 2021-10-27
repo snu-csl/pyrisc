@@ -23,7 +23,7 @@
     .align  2
     .globl  _start
 _start:                         # code entry point
-    lui     sp, 0x80020         # set the stack pointer to 0x80020000
+    lui     sp, 0x82000         # set the stack pointer to 0x82000000
     li      a0, 5               # set the argument
     call    fib                 # call fib(5)
     ebreak                      # terminate the program

@@ -5,7 +5,7 @@ fib:     file format elf32-littleriscv
 Disassembly of section .text:
 
 80000000 <_start>:
-80000000:	80020137          	lui	sp,0x80020
+80000000:	82000137          	lui	sp,0x82000
 80000004:	00500513          	li	a0,5
 80000008:	008000ef          	jal	ra,80000010 <fib>
 8000000c:	00100073          	ebreak
@@ -13,7 +13,7 @@ Disassembly of section .text:
 80000010 <fib>:
 80000010:	00100793          	li	a5,1
 80000014:	04a7d263          	bge	a5,a0,80000058 <Exit>
-80000018:	ff010113          	addi	sp,sp,-16 # 8001fff0 <_end+0xfff0>
+80000018:	ff010113          	addi	sp,sp,-16 # 81fffff0 <_end+0xfffff0>
 8000001c:	00112623          	sw	ra,12(sp)
 80000020:	00812423          	sw	s0,8(sp)
 80000024:	00912223          	sw	s1,4(sp)

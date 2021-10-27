@@ -63,7 +63,7 @@ __snurisc__ accepts a RISC-V executable file compiled by the standard RISC-V GNU
 
 There are several restrictions when an executable file is built from a RISC-V assembly program on __snurisc__.
 1. The text section should begin at the memory address 0x80000000, which is the start address of the Instruction Memory (imem).
-2. Similarly, the data section should begin at the memory address 0x80010000 which is the start address of the Data Memory (dmem).
+2. Similarly, the data section should begin at the memory address 0x81000000 which is the start address of the Data Memory (dmem).
 3. The entry point to the code should be explicitly marked with the `_start` label. It is used to initialize the `pc` register before the program is executed.
 4. No standard C startup code or libraries should be linked to the executable file.
 
