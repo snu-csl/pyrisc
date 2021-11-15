@@ -92,6 +92,8 @@ class Pipe(object):
                 Pipe.cpu.rf.dump()                      # dump register file
             if Log.level >= 7:
                 Pipe.cpu.dmem.dump(skipzero = True)     # dump dmem
+            if Log.level >= 4:
+                print("-" * 50)
 
             if not ok:
                 break;
@@ -118,8 +120,6 @@ class Pipe(object):
 
         if Stat.cycle < Log.start_cycle:
             return
-        if Log.level >= 4 and stage == S_IF:
-            print("-" * 50)
         if Log.level < 5:
             info = ''
         if Log.level >= 4 or (Log.level == 3 and stage == S_WB):
