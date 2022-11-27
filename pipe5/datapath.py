@@ -186,7 +186,7 @@ class IF(Pipe):
 
         if (Pipe.CTL.ID_bubble and Pipe.CTL.ID_stall):
             print("Assert failed: ID_bubble && ID_stall")
-            sys_exit()
+            sys.exit()
         
         if Pipe.CTL.ID_bubble:
             ID.reg_pc           = self.pc
