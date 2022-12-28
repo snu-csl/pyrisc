@@ -49,7 +49,7 @@ class Sim(object):
                 Sim.cpu.dmem.dump(skipzero = True)
 
             if not status == EXC_NONE:
-                break;
+                break
       
         # Handle exceptions, if any
         if (status & EXC_DMEM_ERROR):

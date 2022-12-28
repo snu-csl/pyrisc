@@ -111,7 +111,7 @@ def parse_args(args):
                 print("Invalid option '%s'" % args[index])
                 return None
         else:
-            break;
+            break
 
     if len(args) != index + 1:
         print("Invalid argument '%s'" % args[index + 1:])

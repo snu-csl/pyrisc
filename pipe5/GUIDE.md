@@ -75,7 +75,7 @@ The `run()` method in the `Pipe` class is the actual simulation loop. First, it 
             ok = Pipe.WB.update()
 
             if not ok:
-                break;
+                break
 ```
 
 Each stage consists of two _phases_, namely, `compute()` and `update()`. For any stage `S`, `S.compute()` represents the manipulation of signals using some combinational logic performed inside of the stage, while `S.update()` indicates the step where the contents of the pipeline registers (between the current and the next stage) are updated. In the real processor, all the `*.compute()` phases are performed in parallel and all the state updates specified in `*.update()` are done at once (e.g., on the rising edge of the clock). However, we just serialize the execution of `*.compute()` and `*.update()` to simplify the simulator.
