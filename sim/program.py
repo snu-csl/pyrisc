@@ -105,9 +105,9 @@ class Program(object):
                 memsz = seg.header['p_memsz']
                 if seg.header['p_type'] != 'PT_LOAD':
                     continue
-                if addr >= cpu.imem.mem_start and addr + memsz < cpu.imem.mem_end:
+                if addr >= cpu.imem.mem_start and addr + memsz <= cpu.imem.mem_end:
                     mem = cpu.imem
-                elif addr >= cpu.dmem.mem_start and addr + memsz < cpu.dmem.mem_end:
+                elif addr >= cpu.dmem.mem_start and addr + memsz <= cpu.dmem.mem_end:
                     mem = cpu.dmem
                 else:
                     print("Invalid address range: 0x%08x - 0x%08x" \
